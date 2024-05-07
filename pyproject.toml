@@ -52,5 +52,5 @@ docs = "mkdocs serve"
 pre_test = "task lint"
 test = "pytest -s -x --cov=plasticome -vv"
 post_test = "coverage html"
-run = "run_flask.bat"
+run = "./run_flask.sh"
 

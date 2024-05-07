@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: f9e133e43c48b79653d7d6ed2314092e6a0aec624c27f496ef38684620f2f726 
+    environment:
+      - FLASK_DEBUG="on"
+      - RABBIT_MQ_URL= amqp://admin:admin@rabbitmq:5672//
+      - RESULT_BACKEND=redis://redis:6379/0
+      - C_FORCE_ROOT=true
+    restart: always
+    ports:
+     - "5001:5001"
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./:/app/
+  rabbitmq:
+    image: rabbitmq:3.6.6
+    ports:
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    ports:
+    - "6379:6379"

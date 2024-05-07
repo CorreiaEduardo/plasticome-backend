@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from dotenv import load_dotenv
 
-from plasticome.config.celery_config import celery_app
-from plasticome.services.genbank_service import get_protein_name
-from plasticome.services.plasticome_metadata_service import (
+from ..config.celery import celery_app
+from genbank_service import get_protein_name
+from plasticome_metadata_service import (
     get_all_enzymes,
     get_all_plastic_types_by_enzyme,
     get_all_plastics_with_enzymes,
