@@ -7,7 +7,7 @@ load_dotenv(override=True)
 
 celery_app = Celery(
     'celery_config',
-    broker=os.getenv('RABBIT_MQ_URL'),
+    broker='amqp://guest:guest@rabbitmq:5672//',
     include=[
         'plasticome.services.dbcan_service',
         'plasticome.services.ecpred_service',

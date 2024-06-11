@@ -4,10 +4,8 @@ services:
     # build:
     #   context: .
     #   dockerfile: Dockerfile
-    image: f9e133e43c48b79653d7d6ed2314092e6a0aec624c27f496ef38684620f2f726 
+    image: 8a23e2aea1030c802aa62e413a29add54388efa3756c87117b9bbb07421d58c8
     environment:
-      - FLASK_DEBUG="on"
-      - RABBIT_MQ_URL= amqp://admin:admin@rabbitmq:5672//
       - RESULT_BACKEND=redis://redis:6379/0
       - C_FORCE_ROOT=true
     restart: always
@@ -22,8 +20,9 @@ services:
     ports:
       - "5672:5672"
     environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
+      - RABBITMQ_DEFAULT_VHOST=
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     depends_on:
       - redis
   redis:

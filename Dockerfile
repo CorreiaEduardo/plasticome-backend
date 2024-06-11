@@ -1,8 +1,12 @@
-FROM ubuntu:latest
+FROM ubuntu:latest as builder
 
 COPY . /app
 
 WORKDIR /app
+
+RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
+ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
 RUN apt-get update && \
@@ -45,6 +49,8 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # Install dependencies with poetry
 RUN poetry install --no-root
+
+from builder as runner
 
 # Script preparation
 RUN chmod +x /app/start.sh

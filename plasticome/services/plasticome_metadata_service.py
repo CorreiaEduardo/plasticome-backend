@@ -3,7 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from auth_user_service import authenticate_user
+from .auth_user_service import authenticate_user
 
 load_dotenv(override=True)
 
