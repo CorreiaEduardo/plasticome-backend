@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_pydantic_spec import FlaskPydanticSpec
 
 from ..controllers.fungi_controller import search_fungi_by_name
@@ -24,6 +24,7 @@ def get_fungi_id_by_name(fungi_name):
 
 
 @server.post('/analyze')
+@cross_origin()
 def execute_pipeline():
     return execute_main_pipeline(request.json)
 
