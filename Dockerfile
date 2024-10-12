@@ -15,10 +15,10 @@ RUN apt-get update && \
     curl
 
 # Download and install BLAST+
-RUN curl -o ncbi-blast.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.15.0+-x64-linux.tar.gz && \
+RUN curl -o ncbi-blast.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz && \
     tar -xzvf ncbi-blast.tar.gz && \
     rm ncbi-blast.tar.gz
-ENV PATH="/app/ncbi-blast-2.15.0+/bin:${PATH}"
+ENV PATH="/app/ncbi-blast-2.16.0+/bin:${PATH}"
 
 # Add Docker's official GPG key
 RUN mkdir -m 0755 -p /etc/apt/keyrings && \
@@ -50,7 +50,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 # Install dependencies with poetry
 RUN poetry install --no-root
 
-from builder as runner
+FROM builder as runner
 
 # Script preparation
 RUN chmod +x /app/start.sh
