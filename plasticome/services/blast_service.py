@@ -10,7 +10,7 @@ from Bio.Blast.Applications import (
 )
 from dotenv import load_dotenv
 
-from ..config.celery import celery_app
+from plasticome.config.celery import celery_app
 from .plasticome_metadata_service import (
     get_all_enzymes_by_ec_number,
 )

@@ -2,7 +2,7 @@ import os
 
 import docker
 
-from ..config.celery import celery_app
+from plasticome.config.celery import celery_app
 
 
 @celery_app.task
@@ -30,7 +30,8 @@ def run_dbcan_container(absolute_mount_dir):
     container_params = {
         'image': 'haidyi/run_dbcan:latest',
         'volumes': {
-            local_mount_dir: {'bind': f'/app/{docker_mount}', 'mode': 'rw'}
+            local_mount_dir: {'bind': f'/app/{docker_mount}', 'mode': 'rw'},
+            '/var/run/docker.sock': {'bind': '/var/run/docker.sock', 'mode': 'rw'}
         },
         'working_dir': '/app',
         'command': [

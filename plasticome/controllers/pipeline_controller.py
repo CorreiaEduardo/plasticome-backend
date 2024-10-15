@@ -1,16 +1,16 @@
 from celery import chain
 
-from ..services.analysis_result_service import create_result
-from ..services.blast_service import align_with_blastdb
-from ..services.dbcan_result_filter_service import dbcan_result_filter
-from ..services.dbcan_service import run_dbcan_container
-from ..services.ecpred_result_filter_service import (
+from plasticome.services.analysis_result_service import create_result
+from plasticome.services.blast_service import align_with_blastdb
+from plasticome.services.dbcan_result_filter_service import dbcan_result_filter
+from plasticome.services.dbcan_service import run_dbcan_container
+from plasticome.services.ecpred_result_filter_service import (
     ecpred_result_filter,
 )
-from ..services.ecpred_service import run_ecpred_container
-from ..services.email_service import send_email_with_results
-from ..services.genbank_service import download_fasta_sequence_by_id
-from ..services.Helpers import validate_email
+from plasticome.services.ecpred_service import run_ecpred_container
+from plasticome.services.email_service import send_email_with_results
+from plasticome.services.genbank_service import download_fasta_sequence_by_id
+from plasticome.services.Helpers import validate_email
 
 
 def execute_main_pipeline(data: dict):

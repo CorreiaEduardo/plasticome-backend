@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 
 from dotenv import load_dotenv
 
-from ..config.celery import celery_app
+from plasticome.config.celery import celery_app
 
 load_dotenv(override=True)
 

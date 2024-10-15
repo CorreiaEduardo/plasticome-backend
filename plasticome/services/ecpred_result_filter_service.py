@@ -4,7 +4,7 @@ import pandas as pd
 from Bio import SeqIO
 from dotenv import load_dotenv
 
-from ..config.celery import celery_app
+from plasticome.config.celery import celery_app
 from .plasticome_metadata_service import get_all_enzymes
 
 load_dotenv(override=True)
