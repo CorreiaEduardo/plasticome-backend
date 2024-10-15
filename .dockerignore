@@ -3,3 +3,5 @@ temp_genomes/
 results/
 .vscode/
 tests/
+__init__.py
+docs/
