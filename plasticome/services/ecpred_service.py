@@ -31,7 +31,8 @@ def run_ecpred_container(absolute_mount_dir):
     container_params = {
         'image': 'blueevee/ecpred:latest',
         'volumes': {
-            local_mount_dir: {'bind': f'/app/{docker_mount}', 'mode': 'rw'}
+            local_mount_dir: {'bind': f'/app/{docker_mount}', 'mode': 'rw'},
+            '/var/run/docker.sock': {'bind': '/var/run/docker.sock', 'mode': 'rw'}
         },
         'working_dir': '/app',
         'command': [
