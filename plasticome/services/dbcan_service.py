@@ -31,7 +31,8 @@ def run_dbcan_container(absolute_mount_dir):
         'image': 'haidyi/run_dbcan:latest',
         'volumes': {
             local_mount_dir: {'bind': f'/app/{docker_mount}', 'mode': 'rw'},
-            '/var/run/docker.sock': {'bind': '/var/run/docker.sock', 'mode': 'rw'}
+            '/var/run/docker.sock': {'bind': '/var/run/docker.sock', 'mode': 'rw'},
+            '/app/fam-substrate-mapping.tsv': {'bind': '/app/db/fam-substrate-mapping.tsv', 'mode': 'rw'}
         },
         'working_dir': '/app',
         'command': [
@@ -39,6 +40,8 @@ def run_dbcan_container(absolute_mount_dir):
             'protein',
             '--out_dir',
             f'./{docker_mount}',
+            '--db_dir',
+            './db'
         ],
         'remove': True,
     }

@@ -28,6 +28,9 @@ RUN curl -o ncbi-blast.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/bla
   rm ncbi-blast.tar.gz
 ENV PATH="/app/ncbi-blast-2.16.0+/bin:${PATH}"
 
+# Baixar base tsv para o container run_dbcan
+RUN curl -o fam-substrate-mapping-08012023.tsv https://bcb.unl.edu/dbCAN2/download/Databases/fam-substrate-mapping-08012023.tsv && mv fam-substrate-mapping-08012023.tsv fam-substrate-mapping.tsv
+
 # Configurar Poetry
 ENV POETRY_NO_INTERACTION=1 \
   POETRY_VIRTUALENVS_CREATE=false \
