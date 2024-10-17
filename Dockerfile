@@ -1,4 +1,4 @@
-FROM docker:dind as builder
+FROM docker:24.0.2-dind as builder
 
 USER root
 
@@ -8,24 +8,24 @@ WORKDIR /app
 
 # Instalar pacotes necessários no Alpine (substitui apt-get por apk)
 RUN apk update && apk add --no-cache \
-    ca-certificates \
-    curl \
-    bash \
-    tzdata \
-    build-base \
-    python3 \
-    python3-dev \
-    libffi-dev \
-    openssl-dev \
-    musl-dev \
-    gcc \
-    make \
-    docker-cli
+  ca-certificates \
+  curl \
+  bash \
+  tzdata \
+  build-base \
+  python3 \
+  python3-dev \
+  libffi-dev \
+  openssl-dev \
+  musl-dev \
+  gcc \
+  make \
+  docker-cli
 
 # Baixar e instalar o BLAST+ (semelhante ao Ubuntu)
 RUN curl -o ncbi-blast.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz && \
-    tar -xzvf ncbi-blast.tar.gz && \
-    rm ncbi-blast.tar.gz
+  tar -xzvf ncbi-blast.tar.gz && \
+  rm ncbi-blast.tar.gz
 ENV PATH="/app/ncbi-blast-2.16.0+/bin:${PATH}"
 
 # Configurar Poetry
