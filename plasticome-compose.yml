@@ -1,8 +1,15 @@
+# PARA ESTE COMPOSE FAÇA O CLONE DOS TRES REPOSITORIOS DO SOFTWARE PLASTICOME 
+# E MOVA ESTE ARQUIVO PARA O DIRETORIO RAIZ NO MESMO NIVEL DOS DIRÉTORIOS DOS REPOS:
+# plasticome/
+#    plasticome-frontend/
+#    plasticome-backend/
+#    plasticome-metadata/
+#    plasticome-compose.yml
 services:
   metadata:
     container_name: plasticome_metadata
     # build:
-    #   context: ../plasticome-metadata
+    #   context: ./plasticome-metadata
     #   dockerfile: Dockerfile
     image: correiaeduardo/plasticome-metadata:final-1
     environment:
@@ -24,7 +31,7 @@ services:
     privileged: true
     environment:
       - DOCKER_HOST=tcp://localhost:2375
-      - ENTREZ_EMAIL=
+      - ENTREZ_EMAIL=mestre197@gmail.com
       - RABBIT_MQ_URL=amqp://guest:guest@rabbitmq:5672//
       - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
       - RESULT_BACKEND=redis://redis:6379/0
@@ -42,6 +49,20 @@ services:
     volumes:
       - data:/backend
       - ./plasticome-backend/plasticome:/app/plasticome
+    networks:
+      - plasticome
+      - internal
+  frontend:
+    container_name: plasticome_frontend
+    build:
+      context: ./plasticome-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./plasticome-frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
     networks:
       - plasticome
       - internal
@@ -94,3 +115,5 @@ networks:
 volumes:
   rabbitmq_data:
   data:
+
+
